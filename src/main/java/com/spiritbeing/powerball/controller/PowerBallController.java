@@ -1,5 +1,6 @@
 package com.spiritbeing.powerball.controller;
 
+import com.spiritbeing.powerball.abstractModel.Constants;
 import com.spiritbeing.powerball.model.PagerModel;
 import com.spiritbeing.powerball.model.PowerBall;
 import com.spiritbeing.powerball.model.PowerBallDraw;
@@ -22,11 +23,11 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller @Slf4j
-public class PowerBallController {
-    private static final int BUTTONS_TO_SHOW = 3;
-    private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 5;
-    private static final int[] PAGE_SIZES = { 5, 10};
+public class PowerBallController extends Constants{
+//    private static final int BUTTONS_TO_SHOW = 3;
+//    private static final int INITIAL_PAGE = 0;
+//    private static final int INITIAL_PAGE_SIZE = 5;
+//    private static final int[] PAGE_SIZES = { 5, 10};
 
     private final NotificationService notificationService;
     private final PowerBallService powerBallService;
@@ -70,6 +71,8 @@ public class PowerBallController {
 
     @GetMapping("/drawBalls")
     public String drawBalls(RedirectAttributes attributes){
+        powerBallService.whiteBall().forEach((key, value) -> log.info("key: " + key + " value: " + value));
+
         attributes.addFlashAttribute("drawnBalls", powerBallService.drawnBalls()); //used for redirection to carry over attributes
         return "redirect:/";
     }

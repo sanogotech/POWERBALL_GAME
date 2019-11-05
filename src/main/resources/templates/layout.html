@@ -33,13 +33,16 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.html" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="homePage.html" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/logout}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="users/index.html" th:href="@{/showTable}">Plays Table</a>
+                            <a class="nav-link" href="table.html" th:href="@{/showTable}">Plays Table</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="frequencyTable.html" th:href="@{/showBallsFrequencies}">Ball Frequency</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="posts/userPostIndex.html" th:href="@{/powerball/chart}">Show Chart</a>

@@ -8,5 +8,4 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface PowerBallRepository extends PagingAndSortingRepository<PowerBall, Long> {
     //Set<PowerBall> findByOrderByCreatedDateAsc();
     Page<PowerBall> findByOrderByCreatedDateDesc(Pageable pageable);
-
 }
