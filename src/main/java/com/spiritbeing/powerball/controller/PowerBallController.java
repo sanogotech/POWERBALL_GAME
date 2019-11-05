@@ -38,8 +38,6 @@ public class PowerBallController {
 
     @GetMapping("/")
     public String HomePage(Model model){
-        log.debug("am here in /");
-//        model.addAttribute("message", "NOW DO IT HERE");
         return "homePage";
     }
 
@@ -74,7 +72,6 @@ public class PowerBallController {
 
     @GetMapping("/drawBalls")
     public String drawBalls(RedirectAttributes attributes){
-        log.debug("am here in /");
         attributes.addFlashAttribute("drawnBalls", powerBallService.drawnBalls()); //used for redirection to carry over attributes
         return "redirect:/";
     }

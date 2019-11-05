@@ -60,7 +60,7 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
     @Override
     public Map<Integer, Long> whiteBall() {
         Map<Integer, Long> frequencies = new HashMap<>();
-        getWhiteBalls().parallelStream().forEach(ball -> {
+        getWhiteBalls().forEach(ball -> {
             if(!frequencies.containsKey(ball)){
                 frequencies.put(ball, 1L);
             }else{
@@ -73,13 +73,12 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
 
     private List<Integer> getWhiteBalls(){
         List<Integer> whiteBallsCollection = new ArrayList<>();
-        findAll().parallelStream()
-                .forEach(powerBall -> {
+        findAll().forEach(powerBall -> {
                     whiteBallsCollection.add(powerBall.getBall_1());
-                    whiteBallsCollection.add(powerBall.getBall_1());
-                    whiteBallsCollection.add(powerBall.getBall_1());
-                    whiteBallsCollection.add(powerBall.getBall_1());
-                    whiteBallsCollection.add(powerBall.getBall_1());
+                    whiteBallsCollection.add(powerBall.getBall_2());
+                    whiteBallsCollection.add(powerBall.getBall_3());
+                    whiteBallsCollection.add(powerBall.getBall_4());
+                    whiteBallsCollection.add(powerBall.getBall_5());
                 });
 
         return whiteBallsCollection;
