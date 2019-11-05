@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="layout :: site-head">
+    <title id="pageTitle">Login Page</title>
+</head>
+
+<body>
+<header th:replace="layout::site-header"/>
+<div>
+    <div class="container"><!--this one and d below made the difference-->
+
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr style="text-align: center">
+                    <th>White Ball 1</th>
+                    <th>White Ball 2</th>
+                    <th>White Ball 3</th>
+                    <th>White Ball 4</th>
+                    <th>White Ball 5</th>
+                    <th>Red Ball</th>
+                </tr>
+                </thead>
+                <!--tempEmployee >loop parameter, employees> model attribute-->
+                <tbody style="text-align: center">
+                <tr  id="tr" th:each="draw: ${drawnBalls}" >
+                    <td th:text="${draw.whiteBall1}"></td>
+                    <td th:text="${draw.whiteBall2}"></td>
+                    <td th:text="${draw.whiteBall3}"></td>
+                    <td th:text="${draw.whiteBall4}"></td>
+                    <td th:text="${draw.whiteBall5}"></td>
+                    <td id="redBall" th:text="${draw.redBall}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        <div class="row" style="width: 50%;margin: 0 auto 0 auto">
+            <div style="margin-right: 50px">
+                <form action="#" th:action="@{/drawBalls}">
+                    <button type="submit" class="btn btn-success btn-lg">GENERATE DRAW</button>
+                </form>
+            </div>
+
+            <div>
+                <form action="#" th:action="@{/inputDraw}">
+                    <button type="submit" class="btn btn-success btn-lg">MANUALLY INPUT DRAW</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<footer th:replace="layout::site-footer"/>
+</body>
+</html>

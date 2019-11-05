@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: site-head">
+    <title id="pageTitle">Save Draw</title>
+</head>
+<body>
+<header th:replace="layout::site-header"/>
+<div class="container">
+    <h3>Save Draw</h3>
+    <form action="#" method="post" th:action="@{/save}" th:object="${powerBallUser}">
+
+        <!-- Add hidden form field to handle update: binds to the model attribute, Tells app which employee to update-->
+        <!--Not needed here-->
+        <input th:field="*{id}" type="hidden" />
+            <div class="row">
+                <div class="form-group col-4">
+                    <input class="form-control" placeholder="White ball 1"
+                           th:field="*{ball_1}" type="text">
+                    <span class="formError" th:errors="*{ball_1}"
+                          th:if="${#fields.hasErrors('ball_1')}">invalid ball 1</span>
+
+                </div>
+                <div class="form-group col-4">
+                    <input class="form-control" placeholder="White ball 2"
+                           th:field="*{ball_2}" type="text">
+                    <span class="formError" th:errors="*{ball_2}"
+                          th:if="${#fields.hasErrors('ball_2')}">invalid ball 2</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-4">
+                    <input class="form-control" placeholder="White ball 3"
+                           th:field="*{ball_3}" type="text">
+                    <span class="formError" th:errors="*{ball_3}"
+                          th:if="${#fields.hasErrors('ball_3')}">invalid ball 3</span>
+                </div>
+                <div class="form-group col-4">
+                    <input class="form-control" placeholder="White ball 4"
+                           th:field="*{ball_4}" type="text">
+                    <span class="formError" th:errors="*{ball_4}"
+                          th:if="${#fields.hasErrors('ball_4')}">invalid ball 4</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-4">
+                    <input class="form-control" placeholder="White ball 5"
+                           th:field="*{ball_5}" type="text">
+                    <span class="formError" th:errors="*{ball_5}"
+                          th:if="${#fields.hasErrors('ball_5')}">invalid ball 5</span>
+                </div>
+                <div class="form-group col-4">
+                    <input class="form-control" placeholder="White ball 6"
+                           th:field="*{ball_6}" type="text">
+                    <span class="formError" th:errors="*{ball_6}"
+                          th:if="${#fields.hasErrors('ball_6')}">invalid ball 6</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-4">
+                    <input  class="form-control" type="date" th:field="*{createdDate}" placeholder="date">
+                    <span class="formError" th:errors="*{createdDate}"
+                          th:if="${#fields.hasErrors('createdDate')}">Invalid date</span>
+                </div>
+            </div>
+        <button class="btn btn-lg btn-primary  btn-block border border-success" type="submit">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/}">back to Homepage</a>
+</div>
+<footer th:replace="layout::site-footer"/>
+</body>
+</html>

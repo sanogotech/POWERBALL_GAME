@@ -1,0 +1,87 @@
+
+body>footer {
+    background: #e3f2fd;
+    /*padding: 5px;*/
+    /*margin: 10px 0;*/
+    text-align: center;
+    /*position: absolute;*/
+    /*bottom: 0;*/
+}
+
+table{
+    text-align: center;
+}
+#tr{
+    color: black;
+    font-size: xx-large;
+    font-weight: bold;
+}
+#tr2{
+    color: black;
+    font-size: larger;
+    font-weight: bold;
+}
+
+
+
+#t2{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#redBall{
+    color: red;
+}
+
+.nav-item{
+    font-weight: bolder;
+    color: black;
+}
+#myH1{
+    font-size: 100px;
+    margin-right: 50px;
+}
+
+#logged-in-info {
+    float: right;
+    /*margin-left: 570px;*/
+}
+
+input{
+    width: 50%;
+    margin: 0 auto 30px auto
+}
+
+#logged-in-info form {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+body>main:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+ul#messages li {
+    display: block;
+    width: 80%;
+    margin: 5px auto;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+ul#messages li.info {
+    background: #7f7;
+}
+
+ul#messages li.error {
+    background: #d00;
+    color: white;
+}
+
+.formError {
+    color: red;
+    font-style: italic;
+}
