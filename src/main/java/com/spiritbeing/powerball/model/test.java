@@ -1,5 +1,6 @@
 package com.spiritbeing.powerball.model;
 
+import com.spiritbeing.powerball.abstractModel.Generator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.text.SimpleDateFormat;
@@ -7,7 +8,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class test extends Generator{
+public class test extends Generator {
 
 
     public static void main(String[] args) {

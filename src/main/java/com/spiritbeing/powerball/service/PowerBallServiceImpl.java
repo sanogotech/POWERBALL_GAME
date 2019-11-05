@@ -1,7 +1,7 @@
 package com.spiritbeing.powerball.service;
 
 import com.spiritbeing.powerball.model.BallHolder;
-import com.spiritbeing.powerball.model.Generator;
+import com.spiritbeing.powerball.abstractModel.Generator;
 import com.spiritbeing.powerball.model.PowerBall;
 import com.spiritbeing.powerball.model.PowerBallDraw;
 import com.spiritbeing.powerball.repo.PowerBallRepository;
@@ -123,13 +123,13 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
     }
 
     @Override
-    public PowerBall savePowerBallDraw(PowerBallDraw powerBallDraw) {
+    public void savePowerBallDraw(PowerBallDraw powerBallDraw) {
         log.info("hOPE ISSUE DID NOT OCCUR HERE >>>> i mean id things");
         PowerBall powerBall = new PowerBall(powerBallDraw.getId(), powerBallDraw.getBall_1(),
                 powerBallDraw.getBall_2(),powerBallDraw.getBall_3(), powerBallDraw.getBall_4(),
                 powerBallDraw.getBall_5(), powerBallDraw.getBall_6(), powerBallDraw.getCreatedDate());
 
-        return powerBallRepository.save(powerBall);
+        powerBallRepository.save(powerBall);
     }
 
     @Override

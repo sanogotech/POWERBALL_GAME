@@ -21,7 +21,7 @@ public interface PowerBallService {
     String getCurrentDate();
     PowerBall findById(Long id);
     PowerBall save(PowerBall powerBall);
-    PowerBall savePowerBallDraw(PowerBallDraw powerBallDraw);
+    void savePowerBallDraw(PowerBallDraw powerBallDraw);
     void delete(PowerBall powerBall);
     List<List<Map<Object, Object>>> getCanvasJsChartData();
 }

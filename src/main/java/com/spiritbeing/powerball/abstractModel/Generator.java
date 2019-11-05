@@ -1,5 +1,6 @@
-package com.spiritbeing.powerball.model;
+package com.spiritbeing.powerball.abstractModel;
 
+import com.spiritbeing.powerball.model.BallHolder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.SimpleDateFormat;

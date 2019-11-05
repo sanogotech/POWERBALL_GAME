@@ -42,10 +42,9 @@ public class PowerBallController {
     }
 
     @GetMapping("/showTable")
-    public String HomePage(@RequestParam("pageSize") Optional<Integer> pageSize,
+    public String showTable(@RequestParam("pageSize") Optional<Integer> pageSize,
                            @RequestParam("page") Optional<Integer> page,Model model){
-        log.debug("am here in /");
-        model.addAttribute("message", "NOW DO IT HERE");
+
         //
         // Evaluate page size. If requested parameter is null, return initial
         // page size
@@ -55,9 +54,8 @@ public class PowerBallController {
         // param. decreased by 1.
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         // print repo
-        System.out.println("here is powerball repo " + powerBallService.findAll().iterator().next());
         Page<PowerBall> powerBallList = powerBallService.findByOrderByCreatedDateAsc(PageRequest.of(evalPage, evalPageSize));
-        System.out.println("client list get total pages" + powerBallList.getTotalPages() + "client list get number " + powerBallList.getNumber());
+//        System.out.println("client list get total pages" + powerBallList.getTotalPages() + "client list get number " + powerBallList.getNumber());
         PagerModel pager = new PagerModel(powerBallList.getTotalPages(),powerBallList.getNumber(),BUTTONS_TO_SHOW);
         // add clientmodel
         model.addAttribute("powerBallList",powerBallList);
