@@ -23,26 +23,24 @@
     <!-- END PAGE SIDEBAR -->
     <!-- PAGE TITLE -->
     <div class="page-title">
-        <h2>
-            <span class="fa fa-arrow-circle-o-left"></span> Frequency Table
-        </h2>
+        <h2>Top 10 White And Red Balls</h2>
     </div>
     <!-- END PAGE TITLE -->
-    <a th:href="@{/inputDraw}"
+    <a th:href="@{/}"
        class="btn btn-primary btn-sm mr-5 mb-3">
-        Manually Add Draw
+        Back to Main
     </a>
     <div class="row">
         <table id="t2" class="table table-bordered table-striped">
             <thead class="thead-dark">
             <tr>
-                <th>Drawn Ball</th>
-                <th>whiteBall Frequency</th>
-                <th style="color: red">RedBall Frequency</th>
+                <th>ID</th>
+                <th>Top10 whiteBall</th>
+                <th style="color: red">Top10 RedBall</th>
             </tr>
             </thead>
             <tbody>
-            <tr id="tr2" th:each="balls : ${ballFrequencies}">
+            <tr id="tr2" th:each="balls : ${top10}">
                 <td style="font-style: italic" th:text="${balls.id + ' ->'}">ID</td>
                 <td th:text="${balls.whiteBallFrequency}">White Ball Frequency</td>
                 <td th:text="${balls.redBallFrequency}">>Red Ball Frequency</td>
@@ -50,30 +48,10 @@
             </tr>
             </tbody>
         </table>
-        <nav th:if="${ballFrequencies.totalPages > 0}" class="form-group"
-             th:each="pageNumber : ${pageNumbers}" style="margin-left: 10px">
-            <a th:href="@{/showBallsFrequencies(size=${ballFrequencies.size}, page=${pageNumber})}"
-               th:text="${pageNumber}"
-               th:class="${pageNumber==ballFrequencies.number+ 1} ? active"></a>
-        </nav>
     </div>
     <!-- END PAGE CONTENT -->
     <!-- END PAGE CONTAINER -->
 </div>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    $(document).ready(function() {
-        changePageAndSize();
-    });
-
-    function changePageAndSize() {
-        $('#pageSizeSelect').change(function(evt) {
-            window.location.replace("/showBallsFrequencies/?pageSize=" + this.value + "&page=1");
-        });
-    }
-    /*]]>*/
-</script>
 <footer th:replace="layout::site-footer"/>
 </body>
 </html>

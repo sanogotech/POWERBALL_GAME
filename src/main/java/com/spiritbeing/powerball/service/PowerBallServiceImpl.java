@@ -16,7 +16,8 @@ import java.util.stream.Collectors;
 
 @Service @Slf4j
 public class PowerBallServiceImpl extends Generator implements PowerBallService {
-
+    private final Long INIT_VALUE = 1L;
+    private final int LIMIT = 10;
     private final PowerBallRepository powerBallRepository;
 
     public PowerBallServiceImpl(PowerBallRepository powerBallRepository) {
@@ -41,7 +42,7 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
         //findAll().parallelStream().
         return whiteBall().entrySet().stream()
                 .sorted(Map.Entry.<Integer, Long>comparingByValue().reversed())
-                .limit(10).collect(Collectors.toMap(
+                .limit(LIMIT).collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue
                 ));
@@ -51,7 +52,7 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
     public Map<Integer, Long> findTop10RedBalls() {
         return redBall().entrySet().stream()
                 .sorted(Map.Entry.<Integer, Long>comparingByValue().reversed())
-                .limit(10).collect(Collectors.toMap(
+                .limit(LIMIT).collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue
                 ));
@@ -62,10 +63,10 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
         Map<Integer, Long> frequencies = new HashMap<>();
         getWhiteBalls().forEach(ball -> {
             if(!frequencies.containsKey(ball)){
-                frequencies.put(ball, 1L);
+                frequencies.put(ball, INIT_VALUE);
             }else{
                 Long value = frequencies.get(ball);
-                frequencies.put(ball, value + 1L);
+                frequencies.put(ball, value + INIT_VALUE);
             }
         });
         return  frequencies;
@@ -87,13 +88,13 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
     @Override
     public Map<Integer, Long> redBall() {
         Map<Integer, Long> frequencies = new HashMap<>();
-        findAll().parallelStream().forEach(powerBall -> {
+        findAll().forEach(powerBall -> {
             int redBall = powerBall.getBall_6();
             if(!frequencies.containsKey(redBall)){
-                frequencies.put(redBall, 1L);
+                frequencies.put(redBall, INIT_VALUE);
             }else{
                 Long value = frequencies.get(redBall);
-                frequencies.put(redBall, value + 1L);
+                frequencies.put(redBall, value + INIT_VALUE);
             }
         });
 

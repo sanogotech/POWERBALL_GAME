@@ -8,6 +8,10 @@ body>footer {
     /*bottom: 0;*/
 }
 
+.page-title{
+    text-align: center;
+}
+
 table{
     text-align: center;
 }

@@ -24,7 +24,7 @@
     <header th:fragment="site-header">
         <header>
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-                <a class="navbar-brand" href="index.html" th:href="@{/}"><img src="../public/img/site-logo.png"
+                <a class="navbar-brand" href="homePage.html" th:href="@{/}"><img src="../public/img/site-logo.png"
                                                                               th:src="@{/img/site-logo.png}"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
                         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +43,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="frequencyTable.html" th:href="@{/showBallsFrequencies}">Ball Frequency</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="frequencyTable.html" th:href="@{/top10}">Top 10 Balls</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="posts/userPostIndex.html" th:href="@{/powerball/chart}">Show Chart</a>
