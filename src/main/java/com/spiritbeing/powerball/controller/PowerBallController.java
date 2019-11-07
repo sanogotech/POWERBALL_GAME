@@ -1,5 +1,6 @@
 package com.spiritbeing.powerball.controller;
 
+import com.spiritbeing.powerball.ServiceAddon.HighChartService;
 import com.spiritbeing.powerball.abstractModel.Constants;
 import com.spiritbeing.powerball.model.PagerModel;
 import com.spiritbeing.powerball.model.PowerBall;
@@ -24,17 +25,15 @@ import java.util.Optional;
 
 @Controller @Slf4j
 public class PowerBallController extends Constants{
-//    private static final int BUTTONS_TO_SHOW = 3;
-//    private static final int INITIAL_PAGE = 0;
-//    private static final int INITIAL_PAGE_SIZE = 5;
-//    private static final int[] PAGE_SIZES = { 5, 10};
 
     private final NotificationService notificationService;
     private final PowerBallService powerBallService;
+    private final HighChartService highChartService;
 
-    public PowerBallController(NotificationService notificationService, PowerBallService powerBallService) {
+    public PowerBallController(NotificationService notificationService, PowerBallService powerBallService, HighChartService highChartService) {
         this.notificationService = notificationService;
         this.powerBallService = powerBallService;
+        this.highChartService = highChartService;
     }
 
     @GetMapping("/")
@@ -77,8 +76,7 @@ public class PowerBallController extends Constants{
 //                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
 //                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
 //                        LinkedHashMap::new));
-//        powerBallService.findTop10WhiteBalls().forEach((key, value) -> log.info("key: " + key + " value: " + value));
-//        top10White.forEach((key, value) -> log.info("key: " + key + " value: " + value));
+//        highChartService.getChartCoordinates().forEach((key, value) -> log.info("key: " + key + " value: " + value));
         attributes.addFlashAttribute("drawnBalls", powerBallService.drawnBalls()); //used for redirection to carry over attributes
         return "redirect:/";
     }

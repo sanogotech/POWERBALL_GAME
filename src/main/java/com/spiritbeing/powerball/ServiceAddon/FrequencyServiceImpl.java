@@ -1,5 +1,6 @@
 package com.spiritbeing.powerball.ServiceAddon;
 
+import com.spiritbeing.powerball.abstractModel.Constants;
 import com.spiritbeing.powerball.model.BallsFrequency;
 import com.spiritbeing.powerball.service.PowerBallService;
 import org.springframework.data.domain.Page;
@@ -10,12 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.toMap;
-
 @Service
-public class FrequencyServiceImpl implements FrequencyService {
-    private final PowerBallService powerBallService;
+public class FrequencyServiceImpl extends Constants implements FrequencyService {
 
+    private final PowerBallService powerBallService;
 
     public FrequencyServiceImpl(PowerBallService powerBallService) {
         this.powerBallService = powerBallService;
@@ -66,21 +65,13 @@ public class FrequencyServiceImpl implements FrequencyService {
     @Override
     public List<BallsFrequency> top10() {
 
-        Map<Integer, Long> top10White = powerBallService.findTop10WhiteBalls()
-                .entrySet()
-                .stream()
-                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
-                                LinkedHashMap::new));
-        Map<Integer, Long> top10Red = powerBallService.findTop10RedBalls()
-                .entrySet()
-                .stream()
-                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
-                        LinkedHashMap::new));
+        Map<Integer, Long> top10White = sortedHashMapByValueDescOrder(powerBallService.findTop10WhiteBalls());
+        Map<Integer, Long> top10Red = sortedHashMapByValueDescOrder(powerBallService.findTop10RedBalls());
 
         return getTop10Mapping(top10White, top10Red);
     }
+
+
 
     private List<BallsFrequency> getTop10Mapping(Map<Integer, Long> top10White, Map<Integer, Long> top10Red) {
         List<BallsFrequency> top10 = new LinkedList<>();
@@ -95,4 +86,39 @@ public class FrequencyServiceImpl implements FrequencyService {
         }
         return top10;
     }
+
+
+    private List<Integer> getAllBalls(){
+        List<Integer> whiteBallsCollection = new ArrayList<>();
+        powerBallService.findAll().forEach(powerBall -> {
+            whiteBallsCollection.add(powerBall.getBall_1());
+            whiteBallsCollection.add(powerBall.getBall_2());
+            whiteBallsCollection.add(powerBall.getBall_3());
+            whiteBallsCollection.add(powerBall.getBall_4());
+            whiteBallsCollection.add(powerBall.getBall_5());
+            whiteBallsCollection.add(powerBall.getBall_6());
+        });
+
+        return whiteBallsCollection;
+    }
+
+    @Override
+    public Map<Integer, Long> allBallsSortedMap() {
+        Map<Integer, Long> allBalls = new HashMap<>();
+        getAllBalls().forEach(ball -> {
+            if(!allBalls.containsKey(ball)){
+                allBalls.put(ball, INIT_VALUE);
+            }else{
+                Long value = allBalls.get(ball);
+                allBalls.put(ball, value + INIT_VALUE);
+            }
+        });
+
+
+        return sortedHashMapByKeyAscOrder(allBalls);
+    }
+
+
+
+
 }

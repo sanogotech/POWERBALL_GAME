@@ -18,6 +18,16 @@
     <script src="../public/js/jquery-3.1.0.min.js" th:src="@{/js/jquery-3.1.0.min.js}"></script>
     <script src="../public/js/blog-scripts.js" th:src="@{/js/blog-scripts.js}"></script>
 
+    <!-- To change actively selected-->
+    <script type="text/javascript">
+        $(function(){
+            $('.navbar-nav a').filter(function(){
+                return this.href==location.href}).parent().addClass('active').siblings().removeClass('active')
+            // $('.navbar-nav a').click(function(){
+            //     $(this).parent().addClass('active').siblings().removeClass('active')
+            // }) <!--for ajax-->
+        })
+    </script>
 </head>
 <body>
 <div class="container">
@@ -48,7 +58,10 @@
                             <a class="nav-link" href="frequencyTable.html" th:href="@{/top10}">Top 10 Balls</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="posts/userPostIndex.html" th:href="@{/powerball/chart}">Show Chart</a>
+                            <a class="nav-link" href="chart/barChart.html" th:href="@{/showBarChart}">Show BarChart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="chart/barChart.html" th:href="@{/showPieChart}">Show PieChart</a>
                         </li>
                     </ul>
 

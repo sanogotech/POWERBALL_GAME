@@ -10,6 +10,7 @@ import java.util.List;
 
 @Slf4j
 public abstract class Generator {
+
     public static final int MAX_WHITE_BALL = 69;
     public static final int MIN = 1;
     public static final int MAX_RED_BALL = 26;
