@@ -16,10 +16,10 @@ public class HighChartServiceImpl extends Chart implements HighChartService {
     }
 
     @Override
-    public Map<Integer, Long> getChartCoordinates() {
+    public Map<Integer, Integer> getChartCoordinates() {
 
-            Map<Integer, Long> coordinates = new LinkedHashMap<>();
-            Map<Integer, Long> sortedMap = frequencyService.allBallsSortedMap();
+            Map<Integer, Integer> coordinates = new LinkedHashMap<>();
+            Map<Integer, Integer> sortedMap = frequencyService.allBallsSortedMap();
             //15
             int condition = sortedMap.size()% NUMBER_OF_HISTOGRAM;
             int divisorValue = sortedMap.size() / NUMBER_OF_HISTOGRAM;
@@ -30,7 +30,7 @@ public class HighChartServiceImpl extends Chart implements HighChartService {
 
                 int min = initial_Value + (i * divisor);
                 int max = divisor * (i+1);
-                Long y = yCoordinate(sortedMap, min, max);
+                int y = yCoordinate(sortedMap, min, max);
                 int x = MULTIPLIER * max;
                 coordinates.put(x, y);
             }

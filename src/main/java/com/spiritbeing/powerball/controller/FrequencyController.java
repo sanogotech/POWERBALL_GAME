@@ -3,6 +3,7 @@ package com.spiritbeing.powerball.controller;
 import com.spiritbeing.powerball.ServiceAddon.FrequencyService;
 import com.spiritbeing.powerball.abstractModel.Constants;
 import com.spiritbeing.powerball.model.BallsFrequency;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -16,11 +17,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-public class BallFrequencyController extends Constants {
+@Slf4j
+public class FrequencyController extends Constants {
 
     private final FrequencyService frequencyService;
 
-    public BallFrequencyController(FrequencyService frequencyService) {
+    public FrequencyController(FrequencyService frequencyService) {
         this.frequencyService = frequencyService;
     }
 
@@ -62,13 +64,39 @@ public class BallFrequencyController extends Constants {
             model.addAttribute("pageNumbers", pageNumbers);
         }
 
-        return "frequencyTable";
+        return "frequency/frequency";
     }
 
     @GetMapping("/top10")
     public String top10(Model model) {
         List<BallsFrequency> top10 = frequencyService.top10();
         model.addAttribute("top10", top10);
-        return "top10";
+        log.info("red value: " + frequencyService.redTotalValue());
+        log.info("red value: " + frequencyService.whiteTotalValue());
+        return "frequency/top10";
     }
+
+    @GetMapping("/probability")
+    public String probability(@RequestParam("page") Optional<Integer> page,
+                                       @RequestParam("size") Optional<Integer> size, Model model) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        Page<BallsFrequency> ballFrequencies = frequencyService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        model.addAttribute("ballFrequencies", ballFrequencies);
+        model.addAttribute("totalRedValue", frequencyService.redTotalValue());
+        model.addAttribute("totalWhiteValue", frequencyService.whiteTotalValue());
+
+        int totalPages = ballFrequencies.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        return "frequency/probability";
+    }
+
 }

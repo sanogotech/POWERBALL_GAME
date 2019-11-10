@@ -37,22 +37,22 @@
             <thead class="thead-dark">
             <tr>
                 <th>Drawn Ball</th>
-                <th>whiteBall Frequency</th>
-                <th style="color: red">RedBall Frequency</th>
+                <th>whiteBall Probability</th>
+                <th style="color: red">RedBall Probability</th>
             </tr>
             </thead>
             <tbody>
             <tr id="tr2" th:each="balls : ${ballFrequencies}">
                 <td style="font-style: italic" th:text="${balls.id + ' ->'}">ID</td>
-                <td th:text="${balls.whiteBallFrequency}">White Ball Frequency</td>
-                <td th:text="${balls.redBallFrequency}">>Red Ball Frequency</td>
+                <td th:text="${balls.whiteBallFrequency + ' / ' + totalWhiteValue}">White Ball Frequency</td>
+                <td th:if="${balls.redBallFrequency != 'N/A'}" th:text="${balls.redBallFrequency + ' / ' + totalRedValue }">>Red Ball Frequency</td>
 
             </tr>
             </tbody>
         </table>
         <nav th:if="${ballFrequencies.totalPages > 0}" class="form-group"
              th:each="pageNumber : ${pageNumbers}" style="margin-left: 10px">
-            <a th:href="@{/showBallsFrequencies(size=${ballFrequencies.size}, page=${pageNumber})}"
+            <a th:href="@{/probability(size=${ballFrequencies.size}, page=${pageNumber})}"
                th:text="${pageNumber}"
                th:class="${pageNumber==ballFrequencies.number+ 1} ? active"></a>
         </nav>
@@ -69,7 +69,7 @@
 
     function changePageAndSize() {
         $('#pageSizeSelect').change(function(evt) {
-            window.location.replace("/showBallsFrequencies/?pageSize=" + this.value + "&page=1");
+            window.location.replace("/probability/?pageSize=" + this.value + "&page=1");
         });
     }
     /*]]>*/

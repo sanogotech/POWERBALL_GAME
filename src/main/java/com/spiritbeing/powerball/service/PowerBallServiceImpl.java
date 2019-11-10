@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service @Slf4j
 public class PowerBallServiceImpl extends Generator implements PowerBallService {
-    private final Long INIT_VALUE = 1L;
+    private final int INIT_VALUE = 1;
     private final int LIMIT = 10;
     private final PowerBallRepository powerBallRepository;
 
@@ -38,10 +38,10 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
 
 
     @Override
-    public Map<Integer, Long> findTop10WhiteBalls() {
+    public Map<Integer, Integer> findTop10WhiteBalls() {
         //findAll().parallelStream().
         return whiteBall().entrySet().stream()
-                .sorted(Map.Entry.<Integer, Long>comparingByValue().reversed())
+                .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
                 .limit(LIMIT).collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue
@@ -49,9 +49,9 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
     }
 
     @Override
-    public Map<Integer, Long> findTop10RedBalls() {
+    public Map<Integer, Integer> findTop10RedBalls() {
         return redBall().entrySet().stream()
-                .sorted(Map.Entry.<Integer, Long>comparingByValue().reversed())
+                .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
                 .limit(LIMIT).collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue
@@ -59,13 +59,13 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
     }
 
     @Override
-    public Map<Integer, Long> whiteBall() {
-        Map<Integer, Long> frequencies = new HashMap<>();
+    public Map<Integer, Integer> whiteBall() {
+        Map<Integer, Integer> frequencies = new HashMap<>();
         getWhiteBalls().forEach(ball -> {
             if(!frequencies.containsKey(ball)){
                 frequencies.put(ball, INIT_VALUE);
             }else{
-                Long value = frequencies.get(ball);
+                int value = frequencies.get(ball);
                 frequencies.put(ball, value + INIT_VALUE);
             }
         });
@@ -86,14 +86,14 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
     }
 
     @Override
-    public Map<Integer, Long> redBall() {
-        Map<Integer, Long> frequencies = new HashMap<>();
+    public Map<Integer, Integer> redBall() {
+        Map<Integer, Integer> frequencies = new HashMap<>();
         findAll().forEach(powerBall -> {
             int redBall = powerBall.getBall_6();
             if(!frequencies.containsKey(redBall)){
                 frequencies.put(redBall, INIT_VALUE);
             }else{
-                Long value = frequencies.get(redBall);
+                int value = frequencies.get(redBall);
                 frequencies.put(redBall, value + INIT_VALUE);
             }
         });
@@ -103,8 +103,18 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
 
     @Override
     public List<BallHolder> drawnBalls() {
-        log.info("Am in IMPL>>>>" + randomNumberGenerator());
-        return randomNumberGenerator();
+        //int[] whiteBallArray, int[] whiteBallFrequency,
+        //int[] redBallArray, int[] redBallFrequency)
+        Set<Integer> whiteBallSet = whiteBall().keySet();
+        Collection<Integer> whiteBallSetFrequency = whiteBall().values();
+
+        Set<Integer> redBallSet = redBall().keySet();
+        Collection<Integer> redBallSetFrequency = redBall().values();
+
+        log.info("Am in IMPL>>>>" + randomNumberGenerator(convertSetToArray(whiteBallSet), convertCollectionToArray(whiteBallSetFrequency),
+                convertSetToArray(redBallSet), convertCollectionToArray(redBallSetFrequency)));
+        return randomNumberGenerator(convertSetToArray(whiteBallSet), convertCollectionToArray(whiteBallSetFrequency),
+                convertSetToArray(redBallSet), convertCollectionToArray(redBallSetFrequency));
     }
 
     @Override

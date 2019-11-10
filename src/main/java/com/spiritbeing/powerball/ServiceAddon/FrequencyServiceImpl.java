@@ -22,12 +22,12 @@ public class FrequencyServiceImpl extends Constants implements FrequencyService 
 
     private List<BallsFrequency> ballsFrequency() {
         List<BallsFrequency> ballsFrequencies = new LinkedList<>();
-        Map<Integer, Long> whiteBallsFrequencies = powerBallService.whiteBall();
-        Map<Integer, Long> redBallsFrequencies= powerBallService.redBall();
+        Map<Integer, Integer> whiteBallsFrequencies = powerBallService.whiteBall();
+        Map<Integer, Integer> redBallsFrequencies= powerBallService.redBall();
 
         whiteBallsFrequencies.forEach((key, value) -> {
-            Long whiteBallValue = whiteBallsFrequencies.get(key);
-            Long redBallValue = redBallsFrequencies.get(key);
+            int whiteBallValue = whiteBallsFrequencies.get(key);
+            Integer redBallValue = redBallsFrequencies.get(key);
             if(redBallValue == null){
                 BallsFrequency ballsFrequency = new BallsFrequency(key, whiteBallValue, "N/A");
                 ballsFrequencies.add(ballsFrequency);
@@ -65,18 +65,18 @@ public class FrequencyServiceImpl extends Constants implements FrequencyService 
     @Override
     public List<BallsFrequency> top10() {
 
-        Map<Integer, Long> top10White = sortedHashMapByValueDescOrder(powerBallService.findTop10WhiteBalls());
-        Map<Integer, Long> top10Red = sortedHashMapByValueDescOrder(powerBallService.findTop10RedBalls());
+        Map<Integer, Integer> top10White = sortedHashMapByValueDescOrder(powerBallService.findTop10WhiteBalls());
+        Map<Integer, Integer> top10Red = sortedHashMapByValueDescOrder(powerBallService.findTop10RedBalls());
 
         return getTop10Mapping(top10White, top10Red);
     }
 
 
 
-    private List<BallsFrequency> getTop10Mapping(Map<Integer, Long> top10White, Map<Integer, Long> top10Red) {
+    private List<BallsFrequency> getTop10Mapping(Map<Integer, Integer> top10White, Map<Integer, Integer> top10Red) {
         List<BallsFrequency> top10 = new LinkedList<>();
-        List<Long> whiteValueList = new LinkedList<>(top10White.values());
-        List<Long> redValueList = new LinkedList<>(top10Red.values());
+        List<Integer> whiteValueList = new LinkedList<>(top10White.values());
+        List<Integer> redValueList = new LinkedList<>(top10Red.values());
 
         for (int i = 0; i < whiteValueList.size(); i++) {
             BallsFrequency ballsFrequency = new BallsFrequency((i+1), whiteValueList.get(i),
@@ -103,13 +103,13 @@ public class FrequencyServiceImpl extends Constants implements FrequencyService 
     }
 
     @Override
-    public Map<Integer, Long> allBallsSortedMap() {
-        Map<Integer, Long> allBalls = new HashMap<>();
+    public Map<Integer, Integer> allBallsSortedMap() {
+        Map<Integer, Integer> allBalls = new HashMap<>();
         getAllBalls().forEach(ball -> {
             if(!allBalls.containsKey(ball)){
                 allBalls.put(ball, INIT_VALUE);
             }else{
-                Long value = allBalls.get(ball);
+                int value = allBalls.get(ball);
                 allBalls.put(ball, value + INIT_VALUE);
             }
         });
@@ -118,7 +118,17 @@ public class FrequencyServiceImpl extends Constants implements FrequencyService 
         return sortedHashMapByKeyAscOrder(allBalls);
     }
 
+    @Override
+    public Long whiteTotalValue() {
+        Map<Integer, Integer> whiteBalls = powerBallService.whiteBall();
+        return whiteBalls.values().stream().reduce(Integer::sum).orElse(null).longValue();
+    }
 
+    @Override
+    public Long redTotalValue() {
+        Map<Integer, Integer> redBalls = powerBallService.redBall();
+        return redBalls.values().stream().reduce(Integer::sum).orElse(null).longValue();
+    }
 
 
 }

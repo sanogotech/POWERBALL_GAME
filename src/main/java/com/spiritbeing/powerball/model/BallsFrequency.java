@@ -5,6 +5,6 @@ import lombok.*;
 @Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
 public class BallsFrequency {
     private int id;
-    private Long whiteBallFrequency;
+    private int whiteBallFrequency;
     private String redBallFrequency;
 }

@@ -13,10 +13,10 @@ import java.util.Set;
 public interface PowerBallService {
     Set<PowerBall> findAll();
     Page<PowerBall> findByOrderByCreatedDateAsc(Pageable pageable);
-    Map<Integer, Long> findTop10WhiteBalls();
-    Map<Integer, Long> findTop10RedBalls();
-    Map<Integer, Long> whiteBall();
-    Map<Integer, Long> redBall();
+    Map<Integer, Integer> findTop10WhiteBalls();
+    Map<Integer, Integer> findTop10RedBalls();
+    Map<Integer, Integer> whiteBall();
+    Map<Integer, Integer> redBall();
     List<BallHolder> drawnBalls();
     String getCurrentDate();
     PowerBall findById(Long id);

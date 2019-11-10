@@ -33,11 +33,11 @@ public abstract class Chart {
         return Comparator.comparing(Map.Entry::getValue);
     }
 
-    protected Long yCoordinate(Map<Integer, Long> data, int min, int max){
-        Long total = 0L;
+    protected int yCoordinate(Map<Integer, Integer> data, int min, int max){
+        int total = 0;
 
         for(int i = min; i <= max; i++){
-            Long value = data.get(i);
+            Integer value = data.get(i);
             if(value != null)
                 total += value;
 

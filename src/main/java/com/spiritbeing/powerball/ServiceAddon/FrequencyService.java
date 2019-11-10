@@ -12,5 +12,7 @@ public interface FrequencyService {
     Page<BallsFrequency> findByOrderById(Pageable pageable);
     Page<BallsFrequency> findPaginated(Pageable pageable);
     List<BallsFrequency> top10();
-    Map<Integer, Long> allBallsSortedMap();
+    Map<Integer, Integer> allBallsSortedMap();
+    Long whiteTotalValue();
+    Long redTotalValue();
 }
