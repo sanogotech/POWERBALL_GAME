@@ -71,8 +71,6 @@ public class FrequencyController extends Constants {
     public String top10(Model model) {
         List<BallsFrequency> top10 = frequencyService.top10();
         model.addAttribute("top10", top10);
-        log.info("red value: " + frequencyService.redTotalValue());
-        log.info("red value: " + frequencyService.whiteTotalValue());
         return "frequency/top10";
     }
 
