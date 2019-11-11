@@ -50,11 +50,6 @@ jobs:
             sudo apt-get install default-mysql-client
             mysql -h 127.0.0.1 -u springstudent -springstudent powerball < sql-data/dummy.sql
             mysql -h 127.0.0.1 -u springstudent -springstudent --execute="SELECT * FROM powerball.power_ball"
-    workflows:
-      version: 2
-      build-deploy:
-        jobs:
-          - build
 
       # Download and cache dependencies
       - restore_cache:
