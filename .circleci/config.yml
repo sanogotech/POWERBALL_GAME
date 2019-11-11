@@ -12,8 +12,8 @@ jobs:
         environment:
             MYSQL_ROOT_PASSWORD: xcmens2##
             MYSQL_DATABASE: power_ball
-            MYSQL_USER : springhbstudent
-            MYSQL_PASSWORD : springhbstudent
+            MYSQL_USER : springstudent
+            MYSQL_PASSWORD : springstudent
 
 
 
