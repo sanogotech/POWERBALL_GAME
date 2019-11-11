@@ -17,3 +17,13 @@ A Pretty simple bar and pie  chartto display frequency of balls
 -Paignation
 
 And extendable
+
+###
+MySQL script for Dump sructure and data available 
+-powerball_power_ball
+-powerball_user
+-powerball_authorities
+
+>>>username = zikozee
+>>>hashed password = password123
+>>>Kindly change in database
