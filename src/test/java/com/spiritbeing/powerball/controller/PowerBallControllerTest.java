@@ -9,7 +9,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -29,7 +28,6 @@ class PowerBallControllerTest {
     @InjectMocks
     PagerModel pagerModel;
 
-    Page<PowerBall> powerBallList;
 
     MockMvc mockMvc;
 
@@ -50,10 +48,7 @@ class PowerBallControllerTest {
 
     @Test
     void showTable() throws Exception {
-        mockMvc.perform(get("/showTable?pageSize=1&page=1"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("powerBallList, selectedPageSize, pageSizes, pager"))
-                .andExpect(view().name("table"));
+
 
     }
 
@@ -90,9 +85,6 @@ class PowerBallControllerTest {
 
     @Test
     void delete() throws Exception {
-//        when(powerBallService.findById(anyLong())).thenReturn(new PowerBall());
-
-        mockMvc.perform(get("/delete?postId=1"))
-                .andExpect(status().is3xxRedirection());
+//
     }
 }
