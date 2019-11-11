@@ -1,4 +1,4 @@
-
+[![CircleCI](https://circleci.com/gh/zikozee/POWERBALL_GAME/tree/master.svg?style=svg)](https://circleci.com/gh/zikozee/POWERBALL_GAME/tree/master)
 ## POWERBALL
 A redesign, prediction and collection of data of the famous powerball game.
 
