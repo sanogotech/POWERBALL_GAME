@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Service @Slf4j
 public class PowerBallServiceImpl extends Generator implements PowerBallService {
     private final int INIT_VALUE = 1;
-    private final int LIMIT = 10;
     private final PowerBallRepository powerBallRepository;
 
     public PowerBallServiceImpl(PowerBallRepository powerBallRepository) {
@@ -36,21 +35,20 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
         return powerBallRepository.findByOrderByCreatedDateDesc(pageable);
     }
 
-
     @Override
     public Map<Integer, Integer> findTop10WhiteBalls() {
         //findAll().parallelStream().
-        return whiteBall().entrySet().stream()
-                .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-                .limit(LIMIT).collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue
-                ));
+        return top10Calculus(whiteBall());
     }
 
     @Override
     public Map<Integer, Integer> findTop10RedBalls() {
-        return redBall().entrySet().stream()
+        return top10Calculus(redBall());
+    }
+
+    private Map<Integer, Integer> top10Calculus(Map<Integer, Integer> integerIntegerMap) {
+        int LIMIT = 10;
+        return integerIntegerMap.entrySet().stream()
                 .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
                 .limit(LIMIT).collect(Collectors.toMap(
                         Map.Entry::getKey,
@@ -103,8 +101,6 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
 
     @Override
     public List<BallHolder> drawnBalls() {
-        //int[] whiteBallArray, int[] whiteBallFrequency,
-        //int[] redBallArray, int[] redBallFrequency)
         Set<Integer> whiteBallSet = whiteBall().keySet();
         Collection<Integer> whiteBallSetFrequency = whiteBall().values();
 

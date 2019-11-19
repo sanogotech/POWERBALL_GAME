@@ -79,7 +79,15 @@ class PowerBallControllerTest {
     }
 
     @Test
-    void save() {
+    void save() throws Exception {
+//        PowerBall powerBall = new PowerBall();
+//         when(powerBallService.save(any())).thenReturn(powerBall);
+//
+//         mockMvc.perform(post("/save")
+//                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+//         )
+//                 .andExpect(status().is3xxRedirection())
+//                 .andExpect(view().name("redirect:/showTable"));
 
     }
 
