@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 @Service @Slf4j
 public class PowerBallServiceImpl extends Generator implements PowerBallService {
-    private final int INIT_VALUE = 1;
     private final PowerBallRepository powerBallRepository;
 
     public PowerBallServiceImpl(PowerBallRepository powerBallRepository) {
@@ -56,31 +55,26 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
                 ));
     }
 
+    private List<Integer> getWhiteBalls(){
+        List<Integer> whiteBallsCollection = new ArrayList<>();
+        findAll().forEach(powerBall -> {
+            whiteBallsCollection.add(powerBall.getBall_1());
+            whiteBallsCollection.add(powerBall.getBall_2());
+            whiteBallsCollection.add(powerBall.getBall_3());
+            whiteBallsCollection.add(powerBall.getBall_4());
+            whiteBallsCollection.add(powerBall.getBall_5());
+        });
+
+        return whiteBallsCollection;
+    }
+
     @Override
     public Map<Integer, Integer> whiteBall() {
         Map<Integer, Integer> frequencies = new HashMap<>();
         getWhiteBalls().forEach(ball -> {
-            if(!frequencies.containsKey(ball)){
-                frequencies.put(ball, INIT_VALUE);
-            }else{
-                int value = frequencies.get(ball);
-                frequencies.put(ball, value + INIT_VALUE);
-            }
+            mapInsert(frequencies, ball);
         });
         return  frequencies;
-    }
-
-    private List<Integer> getWhiteBalls(){
-        List<Integer> whiteBallsCollection = new ArrayList<>();
-        findAll().forEach(powerBall -> {
-                    whiteBallsCollection.add(powerBall.getBall_1());
-                    whiteBallsCollection.add(powerBall.getBall_2());
-                    whiteBallsCollection.add(powerBall.getBall_3());
-                    whiteBallsCollection.add(powerBall.getBall_4());
-                    whiteBallsCollection.add(powerBall.getBall_5());
-                });
-
-        return whiteBallsCollection;
     }
 
     @Override
@@ -88,15 +82,20 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
         Map<Integer, Integer> frequencies = new HashMap<>();
         findAll().forEach(powerBall -> {
             int redBall = powerBall.getBall_6();
-            if(!frequencies.containsKey(redBall)){
-                frequencies.put(redBall, INIT_VALUE);
-            }else{
-                int value = frequencies.get(redBall);
-                frequencies.put(redBall, value + INIT_VALUE);
-            }
+            mapInsert(frequencies, redBall);
         });
 
         return frequencies;
+    }
+
+    private void mapInsert(Map<Integer, Integer> frequencies, Integer ball) {
+        int INIT_VALUE = 1;
+        if (!frequencies.containsKey(ball)) {
+            frequencies.put(ball, INIT_VALUE);
+        } else {
+            int value = frequencies.get(ball);
+            frequencies.put(ball, value + INIT_VALUE);
+        }
     }
 
     @Override
