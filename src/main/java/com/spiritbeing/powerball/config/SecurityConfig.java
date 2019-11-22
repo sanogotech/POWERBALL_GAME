@@ -42,19 +42,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .withUser("susan").password(passwordEncoder().encode("test123")).roles("ADMIN");
 //        }
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/css/**","/img/**","/js/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/showMyLoginPage")
-                .loginProcessingUrl("/authenticateTheUser")
-                .permitAll()
-                .and()
-                .logout()
+    protected void configure(HttpSecurity http) throws Exception {// using lambdas
+        http
+                .authorizeRequests(authorizeRequests -> authorizeRequests
+                        .antMatchers("/css/**","/img/**","/js/**").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/showMyLoginPage")
+                        .loginProcessingUrl("/authenticateTheUser")
+                        .permitAll()
+                )
+                .logout(logout -> logout
                 .logoutSuccessUrl("/showMyLoginPage")
-                .permitAll();
+                .permitAll()
+                );
     }
 
     @Bean
