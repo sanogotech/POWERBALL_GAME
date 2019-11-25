@@ -2,7 +2,7 @@
 ## POWERBALL
 A redesign, prediction and collection of data of the famous powerball game.
 
-## Fearures:
+## Features:
 PREDCITS AND GENERATES 5 random white ball number and one red ball number "BASED ON THE PRE-EXISTING DATA" 
 Bootstrapped view to perform CRUD activities
 
