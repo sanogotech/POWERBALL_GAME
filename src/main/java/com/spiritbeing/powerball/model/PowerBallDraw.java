@@ -6,9 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Getter @Setter @NoArgsConstructor @ToString
@@ -45,6 +43,10 @@ public class PowerBallDraw {
     @Max(value = 26, message = "Red " + ball + message3)
     private Integer ball_6;
 
+//    @Past
+//    @Future
+//    @FutureOrPresent
+    @PastOrPresent
     @NotNull(message = "choose a valid date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdDate;  // since this give string  and convert wen saving
