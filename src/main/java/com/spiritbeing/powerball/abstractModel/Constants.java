@@ -7,8 +7,6 @@ import static java.util.stream.Collectors.toMap;
 
 public abstract class Constants {
     protected final int INIT_VALUE = 1;
-
-
     protected final int BUTTONS_TO_SHOW = 3;
     protected final int INITIAL_PAGE = 0;
     protected final int INITIAL_PAGE_SIZE = 5;

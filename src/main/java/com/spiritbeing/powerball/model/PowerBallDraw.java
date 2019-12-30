@@ -6,7 +6,10 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.util.Date;
 
 @Getter @Setter @NoArgsConstructor @ToString
@@ -18,27 +21,32 @@ public class PowerBallDraw {
 
     private Long id;
 
-    @NotNull
+    @NotNull(message = "cannot be empty")
     @Min(value = 1, message = ball + 1 + message1)
     @Max(value = 69, message = ball + 1 + message2)
     private Integer ball_1;
-    @NotNull
+
+    @NotNull(message = "cannot be empty")
     @Min(value = 1, message = ball + 2 + message1)
     @Max(value = 69, message = ball + 2 + message2)
     private Integer ball_2;
-    @NotNull
+
+    @NotNull(message = "cannot be empty")
     @Min(value = 1, message = ball + 3 + message1)
     @Max(value = 69, message = ball + 3 + message2)
     private Integer ball_3;
-    @NotNull
+
+    @NotNull(message = "cannot be empty")
     @Min(value = 1, message = ball + 4 + message1)
     @Max(value = 69, message = ball + 4 + message2)
     private Integer ball_4;
-    @NotNull
+
+    @NotNull(message = "cannot be empty")
     @Min(value = 1, message = ball + 5 + message1)
     @Max(value = 69, message = ball + 5 + message2)
     private Integer ball_5;
-    @NotNull
+
+    @NotNull(message = "cannot be empty")
     @Min(value = 1, message = "Red " + ball +  message1)
     @Max(value = 26, message = "Red " + ball + message3)
     private Integer ball_6;
