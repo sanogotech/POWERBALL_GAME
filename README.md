@@ -3,7 +3,7 @@
 A redesign, prediction and collection of data of the famous powerball game.
 
 ## Features:
-PREDCITS AND GENERATES 5 random white ball number and one red ball number "BASED ON THE PRE-EXISTING DATA" 
+PREDICTS AND GENERATES 5 random white ball number and one red ball number "BASED ON THE PRE-EXISTING DATA" 
 Bootstrapped view to perform CRUD activities
 
 ## Charts
@@ -18,12 +18,13 @@ A Pretty simple bar and pie  chartto display frequency of balls
 
 And extendable
 
-###
+### Database
 MySQL script for Dump sructure and data available 
 -powerball_power_ball
 -powerball_user
 -powerball_authorities
 
+### Security 
 >>>username = zikozee
 >>>hashed password = password123
 >>>Kindly change in database
