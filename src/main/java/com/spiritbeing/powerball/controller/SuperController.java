@@ -1,4 +1,4 @@
-package com.spiritbeing.powerball.exception;
+package com.spiritbeing.powerball.controller;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.bind.WebDataBinder;
