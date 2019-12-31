@@ -70,12 +70,6 @@ public class PowerBallController extends Constants{
 
     @GetMapping("/drawBalls")
     public String drawBalls(RedirectAttributes attributes){
-//        Map<Integer, Long> top10White = powerBallService.findTop10RedBalls()
-//                .entrySet()
-//                .stream()
-//                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-//                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
-//                        LinkedHashMap::new));
         powerBallService.redBall().forEach((key, value) -> log.info("key: " + key + " value: " + value));
         attributes.addFlashAttribute("drawnBalls", powerBallService.drawnBalls()); //used for redirection to carry over attributes
         return "redirect:/";

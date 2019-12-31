@@ -1,16 +1,21 @@
 package com.spiritbeing.powerball.controller;
 
 import com.spiritbeing.powerball.ServiceAddon.FrequencyService;
+import com.spiritbeing.powerball.model.BallsFrequency;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -35,13 +40,16 @@ class FrequencyControllerTest {
 
     @Test
     void showBallsFrequencies() throws Exception {
-//        when(frequencyService.findPaginated(PageRequest.of(anyInt(),1)))
-//                .thenReturn(new PageImpl<>(new ArrayList<>() , PageRequest.of(anyInt(),1, Sort.unsorted()), anyLong()));
-//
-//        mockMvc.perform(get("/showBallsFrequencies?page=1&size=1"))
-//                .andExpect(status().isOk())
-//                .andExpect(model().attributeExists("ballFrequencies, pageNumbers"))
-//                .andExpect(view().name("frequency/frequency"));
+        List<BallsFrequency> frequencies = new ArrayList<>();
+        when(frequencyService.findPaginated(PageRequest.of(0, 1))).thenReturn(new PageImpl<>(frequencies));
+
+        mockMvc.perform(get("/showBallsFrequencies?page=1&size=1")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("page","0")
+                .param("size", "1"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("ballFrequencies"))
+                .andExpect(view().name("frequency/frequency"));
     }
 
     @Test
@@ -56,6 +64,16 @@ class FrequencyControllerTest {
     }
 
     @Test
-    void probability() {
+    void probability() throws Exception {
+        List<BallsFrequency> frequencies = new ArrayList<>();
+        when(frequencyService.findPaginated(PageRequest.of(0, 1))).thenReturn(new PageImpl<>(frequencies));
+
+        mockMvc.perform(get("/probability")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("page","1")
+                .param("size", "1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("frequency/probability"))
+                .andExpect(model().attributeExists("ballFrequencies","totalRedValue", "totalWhiteValue"));
     }
 }
