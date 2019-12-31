@@ -117,7 +117,6 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
         return getDate();
     }
 
-
     @Override
     public PowerBall findById(Long id) {
         return powerBallRepository.findById(id).orElse(null);
@@ -143,8 +142,4 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
         powerBallRepository.delete(powerBall);
     }
 
-    @Override
-    public List<List<Map<Object, Object>>> getCanvasJsChartData() {
-        return null;
-    }
 }

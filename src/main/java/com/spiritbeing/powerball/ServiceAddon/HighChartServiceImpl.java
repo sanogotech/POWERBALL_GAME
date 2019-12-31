@@ -38,24 +38,4 @@ public class HighChartServiceImpl extends Chart implements HighChartService {
             return coordinates;
 
     }
-
-//    @Override
-//    public Map<Integer, Long> getCanvasJsChartData() { // extends Chart
-//        Map<Integer, Long> coordinates = frequencyService.getChartCoordinates();
-//
-//        Map<Object, Object> map = new LinkedHashMap<>();
-//        for(Map.Entry entry : coordinates.entrySet()){
-//
-//            map.put("x", entry.getKey());
-//            map.put("y", entry.getValue());
-//            if(entry.getValue() == getMinValue(coordinates)){
-//                map.put("indexLabel", "Lowest");
-//            }
-//            if(entry.getValue() == getMaxValue(coordinates)){
-//                map.put("indexLabel", "Highest");
-//            }
-//        }
-//
-//        return map;
-//    }
 }

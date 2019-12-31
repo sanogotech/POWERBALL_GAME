@@ -23,5 +23,4 @@ public interface PowerBallService {
     PowerBall save(PowerBall powerBall);
     void savePowerBallDraw(PowerBallDraw powerBallDraw);
     void delete(PowerBall powerBall);
-    List<List<Map<Object, Object>>> getCanvasJsChartData();
 }
