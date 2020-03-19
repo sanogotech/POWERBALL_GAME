@@ -23,33 +23,36 @@
     $(function(){
         Highcharts.chart('container', {
             chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
                 type: 'pie'
             },
             title: {
                 text: 'PowerBall Data Frequency'
             },
             tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} K</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
             },
             plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
                 }
             },
             series: [{
                 name: 'PowerBall',
                 data: [[${coordinates.values()}]]
-            }], formatter: function() {
-                var sliceIndex = this.point.index;
-                var sliceName = this.series.chart.axes[0].categories[sliceIndex];
-                return sliceName
-            }
+            }]
         });
     });
     /*]]>*/
