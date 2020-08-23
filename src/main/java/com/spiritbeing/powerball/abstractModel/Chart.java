@@ -30,7 +30,7 @@ public abstract class Chart {
     }
 
     private Comparator<? super Map.Entry<Integer, Long>> getComparator() {
-        return Comparator.comparing(Map.Entry::getValue);
+        return Map.Entry.comparingByValue();
     }
 
     protected int yCoordinate(Map<Integer, Integer> data, int min, int max){

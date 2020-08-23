@@ -1,7 +1,7 @@
 package com.spiritbeing.powerball.service;
 
-import com.spiritbeing.powerball.model.BallHolder;
 import com.spiritbeing.powerball.abstractModel.Generator;
+import com.spiritbeing.powerball.model.BallHolder;
 import com.spiritbeing.powerball.model.PowerBall;
 import com.spiritbeing.powerball.model.PowerBallDraw;
 import com.spiritbeing.powerball.repo.PowerBallRepository;
@@ -135,6 +135,24 @@ public class PowerBallServiceImpl extends Generator implements PowerBallService 
                 powerBallDraw.getBall_5(), powerBallDraw.getBall_6(), powerBallDraw.getCreatedDate());
 
         powerBallRepository.save(powerBall);
+    }
+
+    @Override
+    public Double sumOfEntryNative() {
+        Collection<Integer> ball1 = new ArrayList<>();
+
+        findAll().forEach(p -> ball1.add(p.getBall_1()));
+
+        return powerBallRepository.sumofEntryNative(ball1, 20);
+    }
+
+    @Override
+    public Double sumOfEntryJPQL() {
+        Collection<Integer> ball1 = new ArrayList<>();
+
+        findAll().forEach(p -> ball1.add(p.getBall_1()));
+
+        return powerBallRepository.sumofEntryJPQL(ball1, 35);
     }
 
     @Override

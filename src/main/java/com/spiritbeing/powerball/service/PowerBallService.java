@@ -23,4 +23,7 @@ public interface PowerBallService {
     PowerBall save(PowerBall powerBall);
     void savePowerBallDraw(PowerBallDraw powerBallDraw);
     void delete(PowerBall powerBall);
+
+    Double sumOfEntryNative();
+    Double sumOfEntryJPQL();
 }
