@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
+/*
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
@@ -31,16 +32,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         + "from authorities where username=?")
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
-//    @Override
-//        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//
-//            auth.inMemoryAuthentication()
-//                    .withUser("zikozee").password(passwordEncoder().encode("ziko123")).roles("EMPLOYEE")
-//                    .and()
-//                    .withUser("mary").password(passwordEncoder().encode("test123")).roles("MANAGER")
-//                    .and()
-//                    .withUser("susan").password(passwordEncoder().encode("test123")).roles("ADMIN");
-//        }
+	*/
+	
+	 	@Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
+          auth.inMemoryAuthentication()
+                  .withUser("zikozee").password(passwordEncoder().encode("ziko123")).roles("EMPLOYEE")
+                  .and()
+                  .withUser("mary").password(passwordEncoder().encode("test123")).roles("MANAGER")
+                   .and()
+                   .withUser("susan").password(passwordEncoder().encode("test123")).roles("ADMIN");
+        }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {// using lambdas
         http
